@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - MARAGANI MOHANA VENKATA SAI</title>
+    <meta name="description" content="Explore my portfolio of web development projects including full-stack applications and frontend designs">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0F172A;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #111827;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #6366F1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A78BFA;
+        }
+        
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #6366F1, #22D3EE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Gradient Button */
+        .gradient-btn {
+            background: linear-gradient(135deg, #6366F1, #22D3EE);
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-btn:hover {
+            background: linear-gradient(135deg, #A78BFA, #22D3EE);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #0F172A, #111827, #1E293B);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -1;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Project Card */
+        .project-card {
+            background: #1E293B;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #6366F1, #22D3EE);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .project-card:hover::before {
+            opacity: 0.1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #6366F1;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Filter Button */
+        .filter-btn {
+            background: #1E293B;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover {
+            border-color: #6366F1;
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, #6366F1, #22D3EE);
+            border-color: transparent;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid rgba(99, 102, 241, 0.2);
+            border-top: 3px solid #6366F1;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Language Badge */
+        .lang-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .lang-java { background: #f89820; color: white; }
+        .lang-javascript { background: #f7df1e; color: black; }
+        .lang-html { background: #e34c26; color: white; }
+        .lang-css { background: #1572b6; color: white; }
+        .lang-python { background: #3572A5; color: white; }
+        .lang-typescript { background: #2b7489; color: white; }
+        .lang-default { background: #6366F1; color: white; }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full glass z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold gradient-text">MVS</a>
+            
+            <div class="flex items-center space-x-6">
+                <a href="index.html" class="text-gray-300 hover:text-white transition">
+                    <i class="fas fa-home mr-2"></i> Home
+                </a>
+                <a href="#projects" class="text-gray-300 hover:text-white transition">
+                    <i class="fas fa-folder-open mr-2"></i> Projects
+                </a>
+                <a href="index.html#contact" class="text-gray-300 hover:text-white transition">
+                    <i class="fas fa-envelope mr-2"></i> Contact
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="pt-24 pb-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">My Projects</h1>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Explore my collection of web development projects, from full-stack applications to frontend designs
+                </p>
+            </div>
+            
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active px-6 py-2 rounded-lg text-white font-medium" data-filter="all">
+                    All Projects
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-lg text-white font-medium" data-filter="frontend">
+                    Frontend
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-lg text-white font-medium" data-filter="fullstack">
+                    Full Stack
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-lg text-white font-medium" data-filter="backend">
+                    Backend
+                </button>
+            </div>
+            
+            <!-- Loading State -->
+            <div id="loading" class="flex justify-center items-center py-20">
+                <div class="text-center">
+                    <div class="spinner mx-auto mb-4"></div>
+                    <p class="text-gray-400">Loading projects from GitHub...</p>
+                </div>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+                <!-- Projects will be dynamically inserted here -->
+            </div>
+            
+            <!-- Error State -->
+            <div id="error" class="hidden text-center py-20">
+                <div class="text-red-500 text-6xl mb-4">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3 class="text-2xl font-semibold text-white mb-4">Unable to Load Projects</h3>
+                <p class="text-gray-400 mb-6">There was an error fetching projects from GitHub. Please try again later.</p>
+                <button onclick="loadProjects()" class="gradient-btn px-6 py-3 rounded-lg text-white font-semibold">
+                    <i class="fas fa-sync-alt mr-2"></i> Retry
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="py-8 px-6 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-400">© 2024 MARAGANI MOHANA VENKATA SAI. All rights reserved.</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="https://github.com" target="_blank" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="mailto:your-email@example.com" class="text-gray-400 hover:text-white transition">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="js/github.js"></script>
+</body>
+</html>

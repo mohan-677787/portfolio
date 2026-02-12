@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARAGANI MOHANA VENKATA SAI - Frontend Developer</title>
+    <meta name="description" content="Frontend Developer & Java Full Stack Developer - Building scalable backend systems and pixel-perfect frontend experiences">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0F172A;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #111827;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #6366F1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A78BFA;
+        }
+        
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #6366F1, #22D3EE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Gradient Button */
+        .gradient-btn {
+            background: linear-gradient(135deg, #6366F1, #22D3EE);
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-btn:hover {
+            background: linear-gradient(135deg, #A78BFA, #22D3EE);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+        
+        /* Card Hover */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+        
+        /* Typing Cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: #22D3EE;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #0F172A, #111827, #1E293B);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -1;
+        }
+        
+        /* Hero Section Fix */
+        #home {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Section Layering */
+        section {
+            position: relative;
+            z-index: 2;
+        }
+        
+        #about {
+            z-index: 3;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Skill Card */
+        .skill-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(34, 211, 238, 0.1));
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            border-color: #6366F1;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            transform: scale(1.05);
+        }
+        
+        /* Project Card */
+        .project-card {
+            position: relative;
+            background: #1E293B;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #6366F1, #22D3EE);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .project-card:hover::before {
+            opacity: 0.1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #6366F1;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid rgba(99, 102, 241, 0.2);
+            border-top: 3px solid #6366F1;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full glass z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold gradient-text">MVS</div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-gray-300 hover:text-white transition">Home</a>
+                <a href="#about" class="nav-link text-gray-300 hover:text-white transition">About</a>
+                <a href="#skills" class="nav-link text-gray-300 hover:text-white transition">Skills</a>
+                <a href="#projects" class="nav-link text-gray-300 hover:text-white transition">Projects</a>
+                <a href="#achievements" class="nav-link text-gray-300 hover:text-white transition">Achievements</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-white transition">Contact</a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-64 h-full glass p-6 md:hidden">
+            <button id="close-menu" class="text-white mb-8">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="mobile-nav-link text-gray-300 hover:text-white transition">Home</a>
+                <a href="#about" class="mobile-nav-link text-gray-300 hover:text-white transition">About</a>
+                <a href="#skills" class="mobile-nav-link text-gray-300 hover:text-white transition">Skills</a>
+                <a href="#projects" class="mobile-nav-link text-gray-300 hover:text-white transition">Projects</a>
+                <a href="#achievements" class="mobile-nav-link text-gray-300 hover:text-white transition">Achievements</a>
+                <a href="#contact" class="mobile-nav-link text-gray-300 hover:text-white transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-20">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4">
+                MARAGANI MOHANA VENKATA SAI
+            </h1>
+            <h2 class="text-2xl md:text-3xl text-gray-300 mb-6">
+                Frontend Developer & Java Full Stack Developer
+            </h2>
+            <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+                I build scalable backend systems and pixel-perfect frontend experiences.
+            </p>
+            <div class="mb-8">
+                <span class="text-xl text-gray-300">I'm skilled in </span>
+                <span id="typing-text" class="text-xl gradient-text typing-cursor"></span>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <a href="projects.html" class="gradient-btn px-8 py-3 rounded-lg text-white font-semibold inline-block text-center">
+                    View Projects
+                </a>
+                <a href="#" id="download-resume" class="glass px-8 py-3 rounded-lg text-white font-semibold inline-block text-center hover:bg-gray-700 transition">
+                    Download Resume
+                </a>
+            </div>
+            
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-6">
+                <a href="https://github.com" target="_blank" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="mailto:your-email@example.com" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6" style="background: #111827;">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 reveal gradient-text">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Professional Summary</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        I'm a passionate B.Tech Computer Science graduate (2025) with expertise in building modern web applications. 
+                        My journey in tech has equipped me with strong fundamentals in both frontend and backend development, 
+                        allowing me to create comprehensive solutions from database design to user interface.
+                    </p>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        I specialize in React.js for frontend development and Java Spring Boot for backend systems. 
+                        My approach combines clean code practices with user-centric design to deliver applications that are 
+                        both powerful and intuitive.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 rounded-full glass text-sm">Problem Solver</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm">Team Player</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm">Quick Learner</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm">Detail Oriented</span>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <h3 class="text-2xl font-semibold mb-6 text-white">Tech Stack</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass p-4 rounded-lg card-hover">
+                            <i class="fab fa-java text-3xl text-red-500 mb-2"></i>
+                            <h4 class="font-semibold text-white">Java</h4>
+                            <p class="text-sm text-gray-400">Spring Boot, JPA</p>
+                        </div>
+                        <div class="glass p-4 rounded-lg card-hover">
+                            <i class="fab fa-react text-3xl text-blue-500 mb-2"></i>
+                            <h4 class="font-semibold text-white">React.js</h4>
+                            <p class="text-sm text-gray-400">Hooks, Context API</p>
+                        </div>
+                        <div class="glass p-4 rounded-lg card-hover">
+                            <i class="fab fa-js text-3xl text-yellow-500 mb-2"></i>
+                            <h4 class="font-semibold text-white">JavaScript</h4>
+                            <p class="text-sm text-gray-400">ES6+, Async/Await</p>
+                        </div>
+                        <div class="glass p-4 rounded-lg card-hover">
+                            <i class="fab fa-css3-alt text-3xl text-blue-400 mb-2"></i>
+                            <h4 class="font-semibold text-white">CSS</h4>
+                            <p class="text-sm text-gray-400">Tailwind, Bootstrap</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 reveal gradient-text">Skills & Expertise</h2>
+            
+            <!-- Programming -->
+            <div class="mb-12 reveal">
+                <h3 class="text-2xl font-semibold mb-6 text-white flex items-center">
+                    <i class="fas fa-code mr-3 text-indigo-500"></i> Programming
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fab fa-java text-3xl mb-2"></i>
+                        <h4 class="font-semibold">Java</h4>
+                        <p class="text-sm text-gray-400">Advanced</p>
+                    </div>
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fab fa-js text-3xl mb-2"></i>
+                        <h4 class="font-semibold">JavaScript</h4>
+                        <p class="text-sm text-gray-400">Advanced</p>
+                    </div>
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fab fa-html5 text-3xl mb-2"></i>
+                        <h4 class="font-semibold">HTML5</h4>
+                        <p class="text-sm text-gray-400">Expert</p>
+                    </div>
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fab fa-css3-alt text-3xl mb-2"></i>
+                        <h4 class="font-semibold">CSS3</h4>
+                        <p class="text-sm text-gray-400">Expert</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Frontend -->
+            <div class="mb-12 reveal">
+                <h3 class="text-2xl font-semibold mb-6 text-white flex items-center">
+                    <i class="fas fa-laptop-code mr-3 text-indigo-500"></i> Frontend
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fab fa-react text-3xl mb-2"></i>
+                        <h4 class="font-semibold">React.js</h4>
+                        <p class="text-sm text-gray-400">Advanced</p>
+                    </div>
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fas fa-wind text-3xl mb-2"></i>
+                        <h4 class="font-semibold">Tailwind CSS</h4>
+                        <p class="text-sm text-gray-400">Expert</p>
+                    </div>
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fab fa-bootstrap text-3xl mb-2"></i>
+                        <h4 class="font-semibold">Bootstrap</h4>
+                        <p class="text-sm text-gray-400">Intermediate</p>
+                    </div>
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fas fa-layer-group text-3xl mb-2"></i>
+                        <h4 class="font-semibold">Context API</h4>
+                        <p class="text-sm text-gray-400">Intermediate</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Backend -->
+            <div class="mb-12 reveal">
+                <h3 class="text-2xl font-semibold mb-6 text-white flex items-center">
+                    <i class="fas fa-server mr-3 text-indigo-500"></i> Backend
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fas fa-leaf text-3xl mb-2"></i>
+                        <h4 class="font-semibold">Spring Boot</h4>
+                        <p class="text-sm text-gray-400">Advanced</p>
+                    </div>
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fas fa-database text-3xl mb-2"></i>
+                        <h4 class="font-semibold">Spring MVC</h4>
+                        <p class="text-sm text-gray-400">Intermediate</p>
+                    </div>
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fas fa-table text-3xl mb-2"></i>
+                        <h4 class="font-semibold">JPA</h4>
+                        <p class="text-sm text-gray-400">Intermediate</p>
+                    </div>
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fas fa-plug text-3xl mb-2"></i>
+                        <h4 class="font-semibold">REST APIs</h4>
+                        <p class="text-sm text-gray-400">Advanced</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tools -->
+            <div class="mb-12 reveal">
+                <h3 class="text-2xl font-semibold mb-6 text-white flex items-center">
+                    <i class="fas fa-tools mr-3 text-indigo-500"></i> Tools
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fab fa-git-alt text-3xl mb-2"></i>
+                        <h4 class="font-semibold">Git</h4>
+                        <p class="text-sm text-gray-400">Advanced</p>
+                    </div>
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fab fa-github text-3xl mb-2"></i>
+                        <h4 class="font-semibold">GitHub</h4>
+                        <p class="text-sm text-gray-400">Advanced</p>
+                    </div>
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fas fa-database text-3xl mb-2"></i>
+                        <h4 class="font-semibold">MySQL</h4>
+                        <p class="text-sm text-gray-400">Intermediate</p>
+                    </div>
+                    <div class="skill-card p-4 rounded-lg text-center">
+                        <i class="fas fa-bolt text-3xl mb-2"></i>
+                        <h4 class="font-semibold">React Query</h4>
+                        <p class="text-sm text-gray-400">Intermediate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Projects Section -->
+    <section id="projects" class="py-20 px-6" style="background: #111827;">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 reveal gradient-text">Featured Projects</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Job Portal Project -->
+                <div class="project-card p-6 rounded-lg reveal">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-semibold text-white">Job Portal</h3>
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold gradient-btn">Full Stack</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        Role-based job portal allowing employers to post jobs and seekers to apply with authentication and email alerts.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 rounded-full glass text-sm">Java</span>
+                        <span class="px-3 py-1 rounded-full glass text-sm">Spring Boot</span>
+                        <span class="px-3 py-1 rounded-full glass text-sm">Spring MVC</span>
+                        <span class="px-3 py-1 rounded-full glass text-sm">JPA</span>
+                        <span class="px-3 py-1 rounded-full glass text-sm">MySQL</span>
+                        <span class="px-3 py-1 rounded-full glass text-sm">HTML/CSS/JS</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="https://github.com" target="_blank" class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                        <a href="#" class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Personal Portfolio Project -->
+                <div class="project-card p-6 rounded-lg reveal">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-semibold text-white">Personal Portfolio</h3>
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold gradient-btn">Frontend</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        Responsive portfolio with performance optimization and clean UI. Showcases projects and skills with modern design.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 rounded-full glass text-sm">HTML5</span>
+                        <span class="px-3 py-1 rounded-full glass text-sm">CSS3</span>
+                        <span class="px-3 py-1 rounded-full glass text-sm">JavaScript</span>
+                        <span class="px-3 py-1 rounded-full glass text-sm">Tailwind CSS</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="https://github.com" target="_blank" class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                        <a href="#" class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 reveal">
+                <a href="projects.html" class="gradient-btn px-8 py-3 rounded-lg text-white font-semibold inline-block">
+                    View All Projects <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 reveal gradient-text">Achievements & Certifications</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass p-6 rounded-lg card-hover reveal">
+                    <div class="text-4xl mb-4 text-center">🏆</div>
+                    <h3 class="text-xl font-semibold text-white mb-3">AWS & DevOps Workshop</h3>
+                    <p class="text-gray-300 mb-4">Completed intensive workshop on AWS services and DevOps practices. Participated in hackathon and secured top position.</p>
+                    <div class="flex items-center text-sm text-gray-400">
+                        <i class="fas fa-calendar mr-2"></i>
+                        <span>2024</span>
+                    </div>
+                </div>
+                
+                <div class="glass p-6 rounded-lg card-hover reveal">
+                    <div class="text-4xl mb-4 text-center">📜</div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Employability Skills Certification</h3>
+                    <p class="text-gray-300 mb-4">Certified in professional skills including communication, teamwork, problem-solving, and industry best practices.</p>
+                    <div class="flex items-center text-sm text-gray-400">
+                        <i class="fas fa-calendar mr-2"></i>
+                        <span>2023</span>
+                    </div>
+                </div>
+                
+                <div class="glass p-6 rounded-lg card-hover reveal">
+                    <div class="text-4xl mb-4 text-center">🎨</div>
+                    <h3 class="text-xl font-semibold text-white mb-3">GUVI Design Skill-A-Thon</h3>
+                    <p class="text-gray-300 mb-4">Participated in national-level design competition showcasing UI/UX skills and creative problem-solving abilities.</p>
+                    <div class="flex items-center text-sm text-gray-400">
+                        <i class="fas fa-calendar mr-2"></i>
+                        <span>2023</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6" style="background: #111827;">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 reveal gradient-text">Get In Touch</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-6">Let's Connect</h3>
+                    <p class="text-gray-300 mb-8">
+                        I'm always interested in hearing about new opportunities and exciting projects. 
+                        Whether you have a question or just want to say hi, feel free to reach out!
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full gradient-btn flex items-center justify-center">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Email</h4>
+                                <p class="text-gray-400">mohanmaragani0@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full gradient-btn flex items-center justify-center">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Phone</h4>
+                                <p class="text-gray-400">+91 8008677787</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full gradient-btn flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Location</h4>
+                                <p class="text-gray-400">India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <form id="contact-form" class="glass p-6 rounded-lg">
+                        <div class="mb-4">
+                            <label for="name" class="block text-white mb-2">Name</label>
+                            <input type="text" id="name" name="name" required
+                                   class="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-indigo-500 focus:outline-none transition">
+                            <span class="text-red-500 text-sm hidden" id="name-error">Please enter your name</span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="email" class="block text-white mb-2">Email</label>
+                            <input type="email" id="email" name="email" required
+                                   class="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-indigo-500 focus:outline-none transition">
+                            <span class="text-red-500 text-sm hidden" id="email-error">Please enter a valid email</span>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-white mb-2">Message</label>
+                            <textarea id="message" name="message" rows="4" required
+                                      class="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-indigo-500 focus:outline-none transition resize-none"></textarea>
+                            <span class="text-red-500 text-sm hidden" id="message-error">Please enter your message</span>
+                        </div>
+                        
+                        <button type="submit" id="submit-btn" 
+                                class="w-full gradient-btn py-3 rounded-lg text-white font-semibold transition flex items-center justify-center gap-2">
+                            <span id="btn-text">Send Message</span>
+                            <div id="btn-spinner" class="spinner hidden"></div>
+                        </button>
+                        
+                        <div id="success-message" class="mt-4 p-4 rounded-lg bg-green-900 text-green-300 hidden">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Message sent successfully! I'll get back to you soon.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-8 px-6 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-400">© 2024 MARAGANI MOHANA VENKATA SAI. All rights reserved.</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="https://github.com" target="_blank" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="mailto:your-email@example.com" class="text-gray-400 hover:text-white transition">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+    <script src="email.js"></script>
+</body>
+</html>
